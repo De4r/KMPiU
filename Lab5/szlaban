@@ -1,0 +1,9 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+
+l=0.5
+pocz='gora'
+
+def szlaban(x, t):
+	
