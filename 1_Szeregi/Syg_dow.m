@@ -13,7 +13,7 @@ t=linspace(-T, T, N);
 syg = t.^2-3*t;
 
 %szereg fouriera
-n=100;
+n=500;
 x = zeros(size(t));
 for i=1:n
     temp = 4*(-1).^i/i*cos(i*t)+6*(-1).^i/i*sin(i*t);

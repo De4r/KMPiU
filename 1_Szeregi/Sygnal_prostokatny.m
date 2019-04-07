@@ -13,7 +13,7 @@ t=linspace(0, T, N);
 prostokatny = rectan(t, A, T);
 
 %szereg fouriera
-n=100;
+n=1000;
 x = zeros(size(t));
 for i=1:2:2*n
     temp = 1/i * sin(i*w*t);
