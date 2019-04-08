@@ -2,7 +2,7 @@ clc
 clear all
 
 t0=0;
-tk=4;
+tk=5;
 n=2000;
 l=0.5;
 tr = linspace(t0,tk,n);
@@ -14,7 +14,7 @@ elseif pocz==0
     y0 = [0, pi/2];
 end
 
-[t,y] = ode45(@(t,x) szlaban(t,x,pocz), tr, y0);
+[t,y] = ode45(@(t,x) szlaban_new(t,x,pocz), tr, y0);
 yy = y*2*l;
 
 y = rad2deg(y);
