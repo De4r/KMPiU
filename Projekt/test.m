@@ -1,8 +1,9 @@
 clc
 clear all
+close all
 
-zs = [0, 10, 20];
-zu = [0, 10, 20];
+zs = [0, 0,]% 0, 0]
+zu = [0, 0,]% 50, 100]
 0; zoZero = 0; xoZero = 0;
 yaZero = 300; zaZero = 600; xaZero = 35; %0
 ybZero = 300; zbZero = 150; xbZero = 5; %0
@@ -13,9 +14,76 @@ yuZero = 450; zuZero = 50; xuZero = -35; %0
 pocz = [0, 300, 300, 350, 350, 325, 450; 0, 600, 150, 125, -25, -50, 50;0, 35, 5, -15, -35, -31, -35];
 plot(pocz(1,:), pocz(2,:), 'x');
 hold on
-for i=1:length(zs)
+
+% wykres dla modelu z artykulu, punktowy
+for i=2:length(zs)
     [par, cord] = coordinatesModel(zs(i), zu(i));
     plot(cord(1,:), cord(2,:), 'o');
     hold on
     grid on
+    plot(cord(1,[1,6,5,7,4,2]),cord(2,[1,6,5,7,4,2]),'b')
+    hold on
+    plot([cord(1,3), (cord(1,5)+cord(1,7))/2],[cord(2,3), (cord(2,5)+cord(2,7))/2],'b')
 end
+
+% wykres dla mojego modelu
+for i=2:length(zs)
+    [par, cord] = coordinatesModel3(zs(i), zu(i));
+    plot(cord(1,:), cord(2,:), '*');
+    hold on
+    grid on
+    plot(cord(1,[1,6,5,4,2]),cord(2,[1,6,5,4,2]),'k')
+    hold on
+    plot(cord(1,[3,5]),cord(2,[3,5]),'k')
+    hold on
+    plot(cord(1,[6,2]),cord(2,[6,2]),'--')
+end
+
+% wykres cambera dla obu modeli
+zu1=-100:20:100;
+zs1=zeros(size(zu1));
+param=[]
+figure(2)
+%model z artykulu
+for i=1:length(zu1)
+    [par, cord] = coordinatesModel(zs1(i), zu1(i));
+    grid on
+    plot(cord(1,[1,6,5,7,4,2]),cord(2,[1,6,5,7,4,2]),'-b')
+    hold on
+    plot([cord(1,3), (cord(1,5)+cord(1,7))/2],[cord(2,3), (cord(2,5)+cord(2,7))/2],'-b')
+    
+end
+param=[]
+
+%model moj
+for i=1:length(zu1)
+    [par, cord] = coordinatesModel3(zs1(i), zu1(i));
+    param=[param; par];
+    
+    plot(cord(1,[1,6,5,4,2]),cord(2,[1,6,5,4,2]),'-.r')
+    hold on
+    plot(cord(1,[3,5]),cord(2,[3,5]),'-.r')
+end
+
+
+
+
+zu1=-100:20:100;
+zs1=zeros(size(zu1));
+param=[]
+
+%model z artykulu
+for i=1:length(zu1)
+    [par, cord] = coordinatesModel(zs1(i), zu1(i));
+    param = [param; par];
+end
+figure(3)
+plot(zu1, param(:,4))
+hold on
+
+param=[]
+for i=1:length(zu1)
+    [par, cord] = coordinatesModel3(zs1(i), zu1(i));
+    param = [param; par];
+end
+plot(zu1, param(:,4),'r')
